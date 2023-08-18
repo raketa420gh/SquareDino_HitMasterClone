@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-// ReSharper disable All
 
 [RequireComponent(typeof(UnitView))]
 [RequireComponent(typeof(UnitAnimator))]

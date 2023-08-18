@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class PlayerStateMachine : StateMachine
 {
     private readonly PlayerIdleState _idleState;
@@ -5,11 +7,11 @@ public class PlayerStateMachine : StateMachine
     private readonly PlayerAttackState _attackState;
 
     public PlayerStateMachine(PlayerStateType startStateType, IPlayer player, IPlayerController playerController, 
-        IProjectileFactory projectileFactory)
+        IProjectileFactory projectileFactory, Camera camera)
     {
         _idleState = new PlayerIdleState(player);
         _moveToNextWaypointState = new PlayerMoveToNextWaypointState(player, playerController);
-        _attackState = new PlayerAttackState(player, playerController, projectileFactory);
+        _attackState = new PlayerAttackState(player, playerController, projectileFactory, camera);
         
         SetState(startStateType);
     }

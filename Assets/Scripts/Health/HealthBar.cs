@@ -18,8 +18,11 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (!gameObject.activeSelf) 
+            return;
+        
         transform.LookAt(_camera.transform);
-        transform.rotation = Quaternion.Euler(new Vector3(45, 0, transform.rotation.z));;
+        transform.rotation = Quaternion.Euler(new Vector3(45, 0, transform.rotation.z));
     }
 
     private IEnumerator ChangeToCurrentPercent(float currentHealthPercent)
@@ -38,6 +41,11 @@ public class HealthBar : MonoBehaviour
         _foregroundImage.fillAmount = currentHealthPercent;
     }
 
-    private void OnPercentChanged(float currentHealthPercent) => 
+    private void OnPercentChanged(float currentHealthPercent)
+    {
+        if (!gameObject.activeSelf) 
+            return;
+        
         StartCoroutine(ChangeToCurrentPercent(currentHealthPercent));
+    }
 }

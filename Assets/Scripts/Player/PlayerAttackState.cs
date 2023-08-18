@@ -6,12 +6,15 @@ public class PlayerAttackState : PlayerState
     private readonly IPlayer _player;
     private readonly IPlayerController _playerController;
     private readonly IProjectileFactory _projectileFactory;
+    private Camera _camera;
         
-    public PlayerAttackState(IPlayer player, IPlayerController playerController, IProjectileFactory projectileFactory) : base(player)
+    public PlayerAttackState(IPlayer player, IPlayerController playerController, IProjectileFactory projectileFactory,
+        Camera camera) : base(player)
     {
         _player = player;
         _playerController = playerController;
         _projectileFactory = projectileFactory;
+        _camera = camera;
     }
 
     public override void Enter()
@@ -28,12 +31,10 @@ public class PlayerAttackState : PlayerState
     {
         if (!Input.GetMouseButtonDown(0))
             return;
-
-        Debug.Log($"Click");
         
         var mousePosition = Input.mousePosition;
 
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        Ray ray = _camera.ScreenPointToRay(mousePosition);
         Debug.DrawLine(ray.origin, ray.direction * Single.PositiveInfinity, Color.red);
         Vector3 hitPoint;
 

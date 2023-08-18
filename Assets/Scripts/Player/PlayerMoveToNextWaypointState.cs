@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMoveToNextWaypointState : PlayerState
@@ -26,7 +27,7 @@ public class PlayerMoveToNextWaypointState : PlayerState
         var distanceToNextWaypoint =
             Vector3.Distance(_player.Unit.WorldObject.transform.position, _nextWaypointPosition);
 
-        if (distanceToNextWaypoint < 0.02f)
+        if (distanceToNextWaypoint < Single.Epsilon)
         {
             _playerController.ReachWaypoint();
         }

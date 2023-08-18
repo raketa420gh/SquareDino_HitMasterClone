@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
     private Waypoint _currentWaypoint;
     private Vector3 _hitPosition;
     private BulletsPool _bulletsPool;
+    private Camera _camera;
 
     public IPlayer Player => _player;
 
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
         _waypointsContainer = waypointsContainer;
         _projectileFactory = projectileFactory;
         _bulletsPool = bulletsPool;
+        _camera = Camera.main;
 
         _player.Unit.OnThrow += OnPlayerThrowEvent;
         
@@ -76,7 +78,7 @@ public class PlayerController : MonoBehaviour, IPlayerController
 
     private void InitializeStateMachine(PlayerStateType startStateType)
     {
-        _stateMachine = new PlayerStateMachine(startStateType, _player, this, _projectileFactory);
+        _stateMachine = new PlayerStateMachine(startStateType, _player, this, _projectileFactory, _camera);
     }
 
     private int GetCurrentReachedWaypointIndex()
