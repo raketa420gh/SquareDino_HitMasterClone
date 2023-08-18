@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51db0da34df24870a7d114695139a3b4, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MoveSpeed: 1
-  Color: {r: 0.9339623, g: 0.2863564, b: 0.2863564, a: 1}
+  _maxHealth: 100
+  _moveSpeed: 5
+  _color: {r: 0.745283, g: 0.17155817, b: 0.08788714, a: 1}

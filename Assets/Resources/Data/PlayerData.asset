@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51db0da34df24870a7d114695139a3b4, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MoveSpeed: 5
-  Color: {r: 0.41757673, g: 0.8679245, b: 0.3479886, a: 1}
+  _maxHealth: 100
+  _moveSpeed: 5
+  _color: {r: 0.11258716, g: 0.6981132, b: 0.062566735, a: 1}
