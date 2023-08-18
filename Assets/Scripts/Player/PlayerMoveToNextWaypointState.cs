@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 
 public class PlayerMoveToNextWaypointState : PlayerState
 {
     private readonly IPlayer _player;
     private readonly IPlayerController _playerController;
+    private readonly float _reachPointDistance = 0.02f;
     private Vector3 _nextWaypointPosition;
 
     public PlayerMoveToNextWaypointState(IPlayer player, IPlayerController playerController) : base(player)
@@ -27,7 +27,7 @@ public class PlayerMoveToNextWaypointState : PlayerState
         var distanceToNextWaypoint =
             Vector3.Distance(_player.Unit.WorldObject.transform.position, _nextWaypointPosition);
 
-        if (distanceToNextWaypoint < Single.Epsilon)
+        if (distanceToNextWaypoint < _reachPointDistance)
         {
             _playerController.ReachWaypoint();
         }
