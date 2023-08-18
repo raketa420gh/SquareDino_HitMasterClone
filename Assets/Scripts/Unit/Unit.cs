@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+// ReSharper disable All
 
 [RequireComponent(typeof(UnitView))]
 [RequireComponent(typeof(UnitAnimator))]
 [RequireComponent(typeof(NavMeshMovement))]
 [RequireComponent(typeof(UnitRagdoll))]
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(UnitLayerSelector))]
 
 public class Unit : MonoBehaviour, IUnit
 {
@@ -13,6 +15,7 @@ public class Unit : MonoBehaviour, IUnit
     public event Action OnDie;
 
     [SerializeField] private Transform _muzzle;
+    [SerializeField] private HealthBar _healthBar;
     private UnitType _type = UnitType.Neutral;
     private UnitData _data;
     private IUnitView _view;
@@ -20,7 +23,7 @@ public class Unit : MonoBehaviour, IUnit
     private IMovement _movement;
     private IUnitRagdoll _ragdoll;
     private IHealth _health;
-    private HealthBar _healthBar;
+    private UnitLayerSelector _layerSelector;
 
     public UnitType Type => _type;
     public UnitData Data => _data;
@@ -36,13 +39,13 @@ public class Unit : MonoBehaviour, IUnit
         _movement = GetComponent<IMovement>();
         _ragdoll = GetComponent<IUnitRagdoll>();
         _health = GetComponent<IHealth>();
-        _healthBar = GetComponentInChildren<HealthBar>();
-        _healthBar.Initialize();
+        _healthBar?.Initialize();
         _health.Setup(100);
         _health.OnOver += OnHealthOver;
-
         _animator.Initialize();
         _animator.OnThrow += OnThrowEvent;
+        _layerSelector = GetComponent<UnitLayerSelector>();
+        _layerSelector.SetLayer(type);
 
         _ragdoll.Deactivate();
         transform.position = position;
